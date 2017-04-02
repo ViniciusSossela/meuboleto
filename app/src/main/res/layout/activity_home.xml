@@ -11,20 +11,20 @@
 
     <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.vsossella.meuboleto.home.HomeActivity">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            style="@style/HeaderBar"
+            app:theme="@style/ActionBarThemeOverlay"
+            app:popupTheme="@style/ActionBarPopupThemeOverlay"
+            />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -34,7 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
         android:divider="@null"
         app:pagamentos="@{homeVModel.pagamentos}" />
 

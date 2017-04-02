@@ -101,6 +101,10 @@ public class CodigoDeBarra implements Serializable {
         return dataDeVencimento;
     }
 
+    public String getDataDeVencimentoFormatada() {
+        return InterpretadorCodigoBarras.parseToDate(dataDeVencimento);
+    }
+
     public void setDataDeVencimento(String dataDeVencimento) {
         this.dataDeVencimento = dataDeVencimento;
     }

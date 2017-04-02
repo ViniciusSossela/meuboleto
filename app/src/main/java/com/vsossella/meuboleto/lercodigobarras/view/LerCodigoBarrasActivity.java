@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 
 import com.google.zxing.BarcodeFormat;
@@ -58,6 +59,9 @@ public class LerCodigoBarrasActivity extends AppCompatActivity implements ZXingS
 //        binding.contentFrame.addView(mScannerView);
         ((ViewGroup) findViewById(R.id.content_frame)).addView(mScannerView);
 
+        Toolbar toolbar = binding.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
