@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="digitarCodigoBarrasVM" type="com.vsossella.meuboleto.digitarcodigobarras.viewmodel.DigitarCodigoBarrasViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <EditText
+                android:text="@={digitarCodigoBarrasVM.codigoDeBarras}"
+                android:inputType="textMultiLine|number"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0,1,2,3,4,5,6,7,8,9,\n"
+                android:hint="00000.00000 00000.000000 00000.000000 0 00000000000000"
+                />
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:onClick="@{() -> digitarCodigoBarrasVM.adicionarPagamentoTouched()}"
+            android:background="@color/colorPrimary"
+            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:text="ADICIONAR PAGAMENTO" />
+
+
+    </RelativeLayout>
+
+
+
+</layout>
