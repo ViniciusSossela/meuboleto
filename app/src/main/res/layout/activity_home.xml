@@ -4,47 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="android.view.View"/>
         <variable
             name="homeVModel"
             type="com.vsossella.meuboleto.home.HomeViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            style="@style/HeaderBar"
-            app:theme="@style/ActionBarThemeOverlay"
-            app:popupTheme="@style/ActionBarPopupThemeOverlay"
-            />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                style="@style/HeaderBar"
+                app:theme="@style/ActionBarThemeOverlay"
+                app:popupTheme="@style/ActionBarPopupThemeOverlay"
+                />
 
-    <!--<include layout="@layout/content_home" />-->
+        </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:divider="@null"
-        app:pagamentos="@{homeVModel.pagamentos}" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        <android.support.v7.widget.RecyclerView
+            android:visibility="@{homeVModel.existePagamentos ? View.VISIBLE : View.GONE }"
+            android:id="@+id/pagamentos_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:divider="@null"
+            app:pagamentos="@{homeVModel.pagamentos}" />
 
-</android.support.design.widget.CoordinatorLayout>
+
+        <LinearLayout
+            android:visibility="@{homeVModel.existePagamentos ? View.GONE : View.VISIBLE }"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:layout_margin="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_meu_boleto"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bem Vindo ao app Meu Boleto!"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estou aqui para evitar que você esqueça de pagar seus boletos. Para isso, basta você informar o código de barras do boleto clicando no botão ali embaixo.\nNo dia de vencimento do boleto, eu avisarei você por meio de uma notificação! ;)"/>
+
+            </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:backgroundTint="@color/blue_color"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>

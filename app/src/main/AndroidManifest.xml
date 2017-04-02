@@ -38,7 +38,12 @@
             android:screenOrientation="landscape"
             android:parentActivityName=".home.HomeActivity">
         </activity>
+        <receiver android:name=".notificacao.NotificationPublisher" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2808ae4e6e8aca7e5d6d21ad49c35b8468d305c6"
+            />
     </application>
 
 </manifest>

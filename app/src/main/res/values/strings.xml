@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">MeuBoleto</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Meu Boleto</string>
+    <string name="action_settings">Versão 1.0</string>
+
+    <string name="clique_para_digitar_codigo_de_barras"><u>ou clique aqui para digitar o código de barras</u></string>
+
 </resources>

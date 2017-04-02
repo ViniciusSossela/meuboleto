@@ -102,14 +102,14 @@ public class InterpretadorCodigoBarras {
 
     public static String parseToDate(String value) {
         Calendar c = Calendar.getInstance();
-        c.set(1997,9,7);
+        c.set(1997,9,7,10,0,0);
         try {
             int days = Integer.parseInt(value);
             c.add(Calendar.DATE, days);
         }
         catch (Exception e ) { }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         String output = sdf.format(c.getTime());
         return output;
     }

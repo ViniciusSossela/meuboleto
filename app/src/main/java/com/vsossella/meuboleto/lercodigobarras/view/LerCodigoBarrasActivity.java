@@ -2,7 +2,6 @@ package com.vsossella.meuboleto.lercodigobarras.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -14,11 +13,11 @@ import android.view.ViewGroup;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.vsossella.meuboleto.R;
-import com.vsossella.meuboleto.codigodebarras.CodigoDeBarra;
 import com.vsossella.meuboleto.codigodebarras.InterpretadorCodigoBarras;
 import com.vsossella.meuboleto.databinding.LerCodigoBarrasActivityBinding;
 import com.vsossella.meuboleto.home.HomeActivity;
 import com.vsossella.meuboleto.lercodigobarras.viewmodel.LerCodigoBarrasViewModel;
+import com.vsossella.meuboleto.servico.ServicoBoleto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +32,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class LerCodigoBarrasActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     ZXingScannerView mScannerView;
-    final String PREFS_NAME = "MyPrefsFile";
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class LerCodigoBarrasActivity extends AppCompatActivity implements ZXingS
 
         LerCodigoBarrasActivityBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.ler_codigo_barras_activity);
-        binding.setLerCodigoBarrasVM(new LerCodigoBarrasViewModel());
+        binding.setLerCodigoBarrasVM(new LerCodigoBarrasViewModel(this));
 
         mScannerView = new ZXingScannerView(this) {
             @Override
@@ -56,15 +53,11 @@ public class LerCodigoBarrasActivity extends AppCompatActivity implements ZXingS
             }
         };
         mScannerView.setFormats(getSupportedFormats());
-//        binding.contentFrame.addView(mScannerView);
         ((ViewGroup) findViewById(R.id.content_frame)).addView(mScannerView);
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
     }
 
     private List<BarcodeFormat> getSupportedFormats() {
@@ -79,25 +72,9 @@ public class LerCodigoBarrasActivity extends AppCompatActivity implements ZXingS
     public void handleResult(Result result) {
         if (!result.getText().isEmpty() && InterpretadorCodigoBarras.isValid(result.getText())) {
             Intent homeIntent = new Intent(this, HomeActivity.class);
-            salvarPagamento(InterpretadorCodigoBarras.decodeString44(result.getText()));
-//            homeIntent.putExtra("barcode", InterpretadorCodigoBarras.decodeString44(result.getText()));
+            ServicoBoleto.salvarPagamento(InterpretadorCodigoBarras.decodeString44(result.getText()), this);
             startActivity(homeIntent);
         } else mScannerView.resumeCameraPreview(this);
-    }
-
-    private void salvarPagamento(CodigoDeBarra codigoDeBarra) {
-
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("pagamentos", buscarPagamentos() + codigoDeBarra.toString());
-
-        // Commit the edits!
-        editor.commit();
-    }
-
-    private String buscarPagamentos() {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        return settings.getString("pagamentos", "");
     }
 
     @Override

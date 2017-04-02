@@ -1,5 +1,7 @@
 package com.vsossella.meuboleto.codigodebarras;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
@@ -7,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vsossella.meuboleto.R;
 import com.vsossella.meuboleto.databinding.PagamentoItemBinding;
@@ -37,7 +40,19 @@ public class CodigoDeBarraAdapter extends RecyclerView.Adapter<CodigoDeBarraAdap
     }
 
     @Override
-    public void onBindViewHolder(CodigoDeBarraAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(CodigoDeBarraAdapter.ViewHolder holder, final int position) {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) v.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Codigo de barras copiado", extractList.get(position).getCodigoDeBarras());
+                clipboard.setPrimaryClip(clip);
+
+                Toast.makeText(v.getContext(), "Codigo de barras copiado", Toast.LENGTH_LONG).show();
+            }
+        });
+
         holder.bindExtractViewModel(extractList.get(position));
     }
 

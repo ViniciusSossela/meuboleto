@@ -1,8 +1,6 @@
 package com.vsossella.meuboleto.codigodebarras;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vsossella on 01/04/17.
@@ -122,6 +120,5 @@ public class CodigoDeBarra implements Serializable {
         return getBanco() + "," + getCodigoDeBarras() + "," + getDataDeVencimento()
                 + "," + getValor() + ";";
     }
-
 
 }

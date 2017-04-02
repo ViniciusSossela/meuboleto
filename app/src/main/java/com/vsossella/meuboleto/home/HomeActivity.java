@@ -1,7 +1,6 @@
 package com.vsossella.meuboleto.home;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -10,7 +9,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,14 +19,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
 import com.vsossella.meuboleto.R;
 import com.vsossella.meuboleto.codigodebarras.CodigoDeBarra;
 import com.vsossella.meuboleto.codigodebarras.CodigoDeBarraAdapter;
 import com.vsossella.meuboleto.databinding.ActivityHomeBinding;
-import com.vsossella.meuboleto.digitarcodigobarras.view.DigitarCodigoBarrasActivity;
 import com.vsossella.meuboleto.lercodigobarras.view.LerCodigoBarrasActivity;
+import com.vsossella.meuboleto.servico.ServicoBoleto;
 
-import java.util.List;
+import io.fabric.sdk.android.Fabric;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -38,11 +37,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_home);
-
+        Fabric.with(this, new Crashlytics());
 
         HomeViewModel viewModel = new HomeViewModel();
-        viewModel.carregarPagamentosFromString(buscarPagamentosFromSharedPreferences());
+        viewModel.carregarPagamentosFromString(ServicoBoleto.buscarPagamentos(this));
 
         ActivityHomeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setHomeVModel(viewModel);
@@ -58,17 +56,14 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(new Intent(HomeActivity.this, LerCodigoBarrasActivity.class));
-
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
             }
         });
+
     }
 
-    private String buscarPagamentosFromSharedPreferences() {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        return settings.getString("pagamentos", "");
-    }
+
 
     private void requestCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
@@ -103,21 +98,4 @@ public class HomeActivity extends AppCompatActivity {
         view.setLayoutManager(layoutManager);
         view.setAdapter(new CodigoDeBarraAdapter(list));
     }
-//
-//    public static class LinearLayoutManagerNoScroll extends LinearLayoutManager {
-//        private boolean isScrollEnabled = false;
-//
-//        public LinearLayoutManagerNoScroll(Context context) {
-//            super(context);
-//        }
-//
-//        public void setScrollEnabled(boolean flag) {
-//            this.isScrollEnabled = flag;
-//        }
-//
-//        @Override
-//        public boolean canScrollVertically() {
-//            return isScrollEnabled && super.canScrollVertically();
-//        }
-//    }
 }

@@ -1,6 +1,7 @@
 package com.vsossella.meuboleto.home;
 
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableField;
 
 import com.vsossella.meuboleto.codigodebarras.CodigoDeBarra;
 
@@ -14,22 +15,11 @@ import java.util.List;
 public class HomeViewModel {
 
     public ObservableArrayList<CodigoDeBarra> pagamentos;
+    public ObservableField<Boolean> existePagamentos = new ObservableField<>();
 
     public HomeViewModel() {
         pagamentos = new ObservableArrayList<>();
-//
-//        CodigoDeBarra c1 = new CodigoDeBarra();
-//        c1.setValor("1");
-//        pagamentos.add(c1);
-//
-//        CodigoDeBarra c2 = new CodigoDeBarra();
-//        c2.setValor("2");
-//        pagamentos.add(c2);
-//
-//        CodigoDeBarra c3 = new CodigoDeBarra();
-//        c3.setValor("3");
-//        pagamentos.add(c3);
-
+        existePagamentos.set(false);
     }
 
 
@@ -46,7 +36,8 @@ public class HomeViewModel {
                 codigosDeBarra.add(new CodigoDeBarra(values[1], values[0], values[2], values[3]));
             }
             pagamentos.addAll(codigosDeBarra);
-        }
+            existePagamentos.set(true);
+        } else existePagamentos.set(false);
     }
 
 
