@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".home.HomeActivity"
+            android:name="com.vsossella.meuboleto.home.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
@@ -32,13 +32,12 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".home.HomeActivity">
         </activity>
-
         <activity android:name=".lercodigobarras.view.LerCodigoBarrasActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape"
             android:parentActivityName=".home.HomeActivity">
         </activity>
-        <receiver android:name=".notificacao.NotificationPublisher" />
+        <receiver android:name="com.vsossella.meuboleto.notificacao.NotificationPublisher" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
