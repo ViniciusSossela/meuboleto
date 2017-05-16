@@ -11,8 +11,10 @@ import com.vsossella.meuboleto.notificacao.Notificacao;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by vsossella on 02/04/17.
@@ -47,6 +49,21 @@ public class ServicoBoleto {
     public static String buscarPagamentos(Context context) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         return settings.getString("pagamentos", "");
+    }
+
+    public static void reloadPagamentos(Context context) {
+        String codigos = buscarPagamentos(context);
+
+        if (codigos != null && !codigos.isEmpty()) {
+            String[] codigosDeBarrasString = codigos.split(";");
+
+            for (String codigoDeBarra :
+                    codigosDeBarrasString) {
+                String[] values = codigoDeBarra.split(",");
+
+                salvarPagamento(new CodigoDeBarra(values[1], values[0], values[2], values[3]), context);
+            }
+        }
     }
 
 

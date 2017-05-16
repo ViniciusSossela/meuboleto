@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera" android:required="true" />
@@ -38,6 +39,13 @@
             android:parentActivityName=".home.HomeActivity">
         </activity>
         <receiver android:name="com.vsossella.meuboleto.notificacao.NotificationPublisher" />
+        <receiver android:name=".reboot.BootReceiver" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".servico.BootService" android:enabled="true"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by vsossella on 01/04/17.
@@ -112,6 +113,18 @@ public class InterpretadorCodigoBarras {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         String output = sdf.format(c.getTime());
         return output;
+    }
+
+    public static Date toDate(String value) {
+        Calendar c = Calendar.getInstance();
+        c.set(1997,9,7,8,0,0);
+        try {
+            int days = Integer.parseInt(value);
+            c.add(Calendar.DATE, days);
+        }
+        catch (Exception e ) { }
+
+        return c.getTime();
     }
 
     public static String parseToCash( String value) {
