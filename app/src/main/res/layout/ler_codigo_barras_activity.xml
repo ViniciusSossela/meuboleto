@@ -1,87 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <variable name="lerCodigoBarrasVM" type="com.vsossella.meuboleto.lercodigobarras.viewmodel.LerCodigoBarrasViewModel"/>
+
+        <variable
+            name="lerCodigoBarrasVM"
+            type="com.vsossella.meuboleto.lercodigobarras.viewmodel.LerCodigoBarrasViewModel" />
     </data>
 
 
-    <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_ler_codigo_barras"
+            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                style="@style/HeaderBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                style="@style/HeaderBar"
-                app:theme="@style/ActionBarThemeOverlay"
                 app:popupTheme="@style/ActionBarPopupThemeOverlay"
-                />
+                app:theme="@style/ActionBarThemeOverlay" />
 
         </android.support.design.widget.AppBarLayout>
 
-            <RelativeLayout
-                android:background="@drawable/gradient_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@android:color/white"
-                    android:text="Posicione o código de barras no leitor"
-                    />
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
-                <ImageView
-                    android:layout_alignParentRight="true"
-                    android:layout_margin="15dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_meu_boleto"/>
+        <RelativeLayout
+            android:layout_below="@+id/app_bar_ler_codigo_barras"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/gradient_background">
 
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Posicione o código de barras no leitor"
+                android:textColor="@android:color/white" />
 
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="15dp"
+                android:src="@drawable/ic_meu_boleto" />
 
-            <FrameLayout
-                android:id="@+id/content_frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:background="@drawable/gradient_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-
-                <TextView
-                    android:onClick="@{() -> lerCodigoBarrasVM.digitarCodigoDeBarras()}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@android:color/white"
-                    android:text="@string/clique_para_digitar_codigo_de_barras"
-                    />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/gradient_background">
 
 
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:onClick="@{() -> lerCodigoBarrasVM.digitarCodigoDeBarras()}"
+                android:text="@string/clique_para_digitar_codigo_de_barras"
+                android:textColor="@android:color/white" />
 
-        </LinearLayout>
 
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
 </layout>

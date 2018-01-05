@@ -32,9 +32,6 @@ public class BarCodeReaderView extends ViewFinderView {
     @Override
     public synchronized void updateFramingRect() {
         super.updateFramingRect();
-        int width = getWidth();
-        int height = getHeight() / 3;
-        super.getFramingRect().set(0, 0, width, height-35);
     }
 
     @Override
