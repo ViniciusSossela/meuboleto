@@ -27,7 +27,21 @@ import com.vsossella.meuboleto.databinding.ActivityHomeBinding;
 import com.vsossella.meuboleto.lercodigobarras.view.LerCodigoBarrasActivity;
 import com.vsossella.meuboleto.servico.ServicoBoleto;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import java.util.List;
+import java.util.concurrent.Callable;
+
 import io.fabric.sdk.android.Fabric;
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.SingleObserver;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -39,8 +53,43 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
 
-        HomeViewModel viewModel = new HomeViewModel();
-        viewModel.carregarPagamentosFromString(ServicoBoleto.buscarPagamentos(this));
+        final HomeViewModel viewModel = new HomeViewModel();
+
+//        Single.fromCallable(new Callable<Object>() {
+//            @Override
+//            public Object call() throws Exception {
+//                return null;
+//            }
+//        }).subscribe(Schedulers.io())
+
+
+
+        ServicoBoleto.getBoletos(this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<CodigoDeBarra>>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<CodigoDeBarra> codigoDeBarras) {
+                        viewModel.carregarBoletos(codigoDeBarras);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
 
         ActivityHomeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setHomeVModel(viewModel);

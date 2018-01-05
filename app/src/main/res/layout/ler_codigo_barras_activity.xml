@@ -29,29 +29,29 @@
 
         </android.support.design.widget.AppBarLayout>
 
-            <RelativeLayout
-                android:background="@drawable/gradient_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+            <!--<RelativeLayout-->
+                <!--android:background="@drawable/gradient_background"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@android:color/white"
-                    android:text="Posicione o código de barras no leitor"
-                    />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:text="Posicione o código de barras no leitor"-->
+                    <!--/>-->
 
-                <ImageView
-                    android:layout_alignParentRight="true"
-                    android:layout_margin="15dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_meu_boleto"/>
+                <!--<ImageView-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_margin="15dp"-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:src="@drawable/ic_meu_boleto"/>-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
 
             <FrameLayout
@@ -60,25 +60,25 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
-            <RelativeLayout
-                android:background="@drawable/gradient_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+            <!--<RelativeLayout-->
+                <!--android:background="@drawable/gradient_background"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1">-->
 
 
-                <TextView
-                    android:onClick="@{() -> lerCodigoBarrasVM.digitarCodigoDeBarras()}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@android:color/white"
-                    android:text="@string/clique_para_digitar_codigo_de_barras"
-                    />
+                <!--<TextView-->
+                    <!--android:onClick="@{() -> lerCodigoBarrasVM.digitarCodigoDeBarras()}"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:text="@string/clique_para_digitar_codigo_de_barras"-->
+                    <!--/>-->
 
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
         </LinearLayout>
 

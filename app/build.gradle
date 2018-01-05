@@ -12,13 +12,13 @@ apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
 }
 
 apply from: "$project.rootDir/tools/script-git-version.gradle"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
     dataBinding {
         enabled = true
     }
@@ -36,6 +36,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -43,14 +47,24 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
 
     //Barcode
-    compile 'me.dm7.barcodescanner:zxing:1.9'
+    compile 'me.dm7.barcodescanner:zxing:1.9.8'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true;
     }
+
+    compile "android.arch.persistence.room:runtime:1.0.0-alpha1"
+    compile 'android.arch.persistence.room:rxjava2:1.0.0-alpha1'
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha1"
+
+    // RXJava
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+
 }

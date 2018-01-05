@@ -52,7 +52,9 @@ public class LerCodigoBarrasActivity extends AppCompatActivity implements ZXingS
                 super.onDraw(canvas);
             }
         };
+//        mScannerView = new ZXingScannerView(this);
         mScannerView.setFormats(getSupportedFormats());
+
         ((ViewGroup) findViewById(R.id.content_frame)).addView(mScannerView);
 
         Toolbar toolbar = binding.toolbar;

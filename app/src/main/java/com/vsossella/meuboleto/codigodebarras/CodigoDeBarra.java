@@ -1,31 +1,50 @@
 package com.vsossella.meuboleto.codigodebarras;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
 
 /**
  * Created by vsossella on 01/04/17.
  */
-
+@Entity
 public class CodigoDeBarra implements Serializable {
 
+    @PrimaryKey
     String codigoDeBarras;
 
+    @Ignore
     String campo1;
+    @Ignore
     String campo2;
+    @Ignore
     String campo3;
+    @Ignore
     String campo4;
+    @Ignore
     String campo5;
 
+    @ColumnInfo(name = "banco")
     String banco;
+    @ColumnInfo(name = "moeda")
     String moeda;
+    @ColumnInfo(name = "data_vencimento")
     String dataDeVencimento;
+    @ColumnInfo(name = "valor")
     String valor;
+    @ColumnInfo(name = "pago")
+    Boolean pago;
 
-    public CodigoDeBarra(String codigoDeBarras, String banco, String dataDeVencimento, String valor) {
+    @Ignore
+    public CodigoDeBarra(String codigoDeBarras, String banco, String dataDeVencimento, String valor, Boolean pago) {
         this.codigoDeBarras = codigoDeBarras;
         this.banco = banco;
         this.dataDeVencimento = dataDeVencimento;
         this.valor = valor;
+        this.pago = pago;
     }
 
     public CodigoDeBarra() {
@@ -107,6 +126,14 @@ public class CodigoDeBarra implements Serializable {
         this.dataDeVencimento = dataDeVencimento;
     }
 
+    public Boolean getPago() {
+        return pago;
+    }
+
+    public void setPago(Boolean pago) {
+        this.pago = pago;
+    }
+
     public String getValor() {
         return valor;
     }
@@ -118,7 +145,7 @@ public class CodigoDeBarra implements Serializable {
 
     public String toString() {
         return getBanco() + "," + getCodigoDeBarras() + "," + getDataDeVencimento()
-                + "," + getValor() + ";";
+                + "," + getValor() + "," + getPago() + ";";
     }
 
 }

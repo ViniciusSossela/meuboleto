@@ -14,7 +14,7 @@ public class BootService extends IntentService {
     }
 
     private void setAlarmsFromDatabase() {
-        ServicoBoleto.scheduleAgainPagamentos(getBaseContext());
+        ServicoBoleto.scheduleAgainBoletos(getApplicationContext());
     }
 
     @Override

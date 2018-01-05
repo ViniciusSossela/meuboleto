@@ -26,20 +26,20 @@ public class HomeViewModel {
     }
 
 
-    public void carregarPagamentosFromString(String codigos) {
-        if (codigos != null && !codigos.isEmpty()) {
-            String[] codigosDeBarrasString = codigos.split(";");
+    public void carregarBoletos(List<CodigoDeBarra> boletos) {
+        if (boletos != null && boletos.isEmpty()) {
+//            String[] codigosDeBarrasString = codigos.split(";");
+//
+//            List<CodigoDeBarra> codigosDeBarra = new ArrayList<>();
+//
+//            for (String codigoDeBarra :
+//                    codigosDeBarrasString) {
+//                String[] values = codigoDeBarra.split(",");
+//
+//                codigosDeBarra.add(new CodigoDeBarra(values[1], values[0], values[2], values[3]));
+//            }
 
-            List<CodigoDeBarra> codigosDeBarra = new ArrayList<>();
-
-            for (String codigoDeBarra :
-                    codigosDeBarrasString) {
-                String[] values = codigoDeBarra.split(",");
-
-                codigosDeBarra.add(new CodigoDeBarra(values[1], values[0], values[2], values[3]));
-            }
-
-            Collections.sort(codigosDeBarra, new Comparator<CodigoDeBarra>() {
+            Collections.sort(boletos, new Comparator<CodigoDeBarra>() {
                 public int compare(CodigoDeBarra o1, CodigoDeBarra o2) {
                     return InterpretadorCodigoBarras.toDate(o1.getDataDeVencimento())
                             .compareTo(InterpretadorCodigoBarras.toDate(o2.getDataDeVencimento()));
@@ -47,7 +47,7 @@ public class HomeViewModel {
             });
 
 
-            pagamentos.addAll(codigosDeBarra);
+            pagamentos.addAll(boletos);
             existePagamentos.set(true);
         } else existePagamentos.set(false);
     }
